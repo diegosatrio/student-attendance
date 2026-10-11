@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Riwayat Absensi - Student Attendance</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <h1>Riwayat Absensi</h1>
+
+        <p>Berikut adalah riwayat absensi kamu.</p>
+
+        <br>
+
+        {% if attendance_data %}
+
+        <table class="attendance-table">
+
+            <thead>
+
+                <tr>
+                    <th>No</th>
+                    <th>Mata Kuliah</th>
+                    <th>Tanggal & Waktu</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for attendance in attendance_data %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    <td>{{ attendance.subject }}</td>
+
+                    <td>{{ attendance.date }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p class="empty-message">
+            Belum ada riwayat absensi.
+        </p>
+
+        {% endif %}
+
+        <br>
+
+        <a href="{{ url_for('dashboard') }}" class="menu-button">
+            Kembali ke Dashboard
+        </a>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Absensi - Student Attendance</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <h1>Absensi</h1>
+
+        <p>Silakan isi nama dan pilih mata kuliah untuk melakukan absensi.</p>
+
+        <form action="{{ url_for('take_attendance') }}" method="POST">
+
+            <label for="student_name">Nama Mahasiswa</label>
+
+            <input
+                type="text"
+                id="student_name"
+                name="student_name"
+                placeholder="Masukkan nama kamu"
+                required
+            >
+
+            <label for="subject">Mata Kuliah</label>
+
+            <select id="subject" name="subject" required>
+
+                <option value="">-- Pilih Mata Kuliah --</option>
+
+                {% for subject in subjects %}
+
+                <option value="{{ subject }}">
+                    {{ subject }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+            <button type="submit" class="menu-button">
+                Hadir
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="{{ url_for('dashboard') }}" class="logout-button">
+            Kembali ke Dashboard
+        </a>
+
+    </div>
+
+</body>
+
+</html>

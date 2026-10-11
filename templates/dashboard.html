@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - Student Attendance</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <main class="dashboard-container">
+
+        <header class="dashboard-header">
+            <div>
+                <p class="welcome-label">STUDENT ATTENDANCE</p>
+
+                <h1>Dashboard</h1>
+
+                <h2>Selamat datang, {{ username }} 👋</h2>
+
+                <p class="dashboard-description">
+                    Pantau kehadiran dan aktivitas perkuliahanmu di sini.
+                </p>
+            </div>
+
+            <div class="role role-dashboard">
+                🎓 Mahasiswa
+            </div>
+        </header>
+
+
+        <section class="stats-grid">
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-icon icon-blue">📋</span>
+                    <span class="stat-label">Total Kehadiran</span>
+                </div>
+
+                <h3 class="stat-value">{{ total_attendance }}</h3>
+
+                <p class="stat-detail">
+                    Total absensi yang tercatat
+                </p>
+            </article>
+
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-icon icon-purple">📚</span>
+                    <span class="stat-label">Mata Kuliah</span>
+                </div>
+
+                <h3 class="stat-value">{{ total_subjects }}</h3>
+
+                <p class="stat-detail">
+                    Mata kuliah berbeda yang diabsen
+                </p>
+            </article>
+
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span class="stat-icon icon-green">🕒</span>
+                    <span class="stat-label">Absensi Terakhir</span>
+                </div>
+
+                {% if latest_attendance %}
+
+                    <h3 class="latest-subject">
+                        {{ latest_attendance.subject }}
+                    </h3>
+
+                    <p class="stat-detail">
+                        {{ latest_attendance.date }}
+                    </p>
+
+                {% else %}
+
+                    <h3 class="latest-subject">Belum ada</h3>
+
+                    <p class="stat-detail">
+                        Kamu belum melakukan absensi.
+                    </p>
+
+                {% endif %}
+            </article>
+
+        </section>
+
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+                <h2>Menu Utama</h2>
+
+                <p>Pilih aktivitas yang ingin kamu lakukan.</p>
+            </div>
+
+            <div class="dashboard-menu">
+
+                <a href="{{ url_for('attendance') }}"
+                   class="menu-button">
+                    <span>📝</span>
+                    <span>Isi Absensi</span>
+                    <span class="menu-arrow">→</span>
+                </a>
+
+                <a href="{{ url_for('history') }}"
+                   class="menu-button">
+                    <span>📅</span>
+                    <span>Riwayat Absensi</span>
+                    <span class="menu-arrow">→</span>
+                </a>
+                <a href="{{ url_for('dashboard') }}" class="menu-button">
+                   Kembali ke Dashboard
+</a>
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+            Student Attendance · Sistem Informasi Kehadiran Mahasiswa
+        </footer>
+
+    </main>
+
+</body>
+
+</html>

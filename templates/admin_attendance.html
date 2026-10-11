@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Absensi - Admin</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <h1>Data Absensi</h1>
+
+        <p>Berikut adalah seluruh data absensi mahasiswa.</p>
+
+        <br>
+
+        {% if attendance_data %}
+
+        <table class="attendance-table">
+
+            <thead>
+
+                <tr>
+                    <th>No</th>
+                    <th>Mahasiswa</th>
+                    <th>Mata Kuliah</th>
+                    <th>Tanggal & Waktu</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for attendance in attendance_data %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    <td>{{ attendance.username }}</td>
+
+                    <td>{{ attendance.subject }}</td>
+
+                    <td>{{ attendance.date }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p class="empty-message">
+            Belum ada mahasiswa yang melakukan absensi.
+        </p>
+
+        {% endif %}
+
+        <br>
+
+        <a href="{{ url_for('admin_dashboard') }}" class="menu-button">
+            Kembali ke Dashboard
+        </a>
+
+    </div>
+
+</body>
+
+</html>

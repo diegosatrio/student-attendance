@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <h1>Admin Dashboard</h1>
+
+        <h2>Selamat datang, {{ username }} 👋</h2>
+
+        <p>
+            Kelola dan pantau data kehadiran mahasiswa.
+        </p>
+
+        <p class="role">
+            Administrator
+        </p>
+
+
+        <div class="dashboard-menu">
+
+            <a href="{{ url_for('admin_attendance') }}" class="menu-button">
+                📊 &nbsp; Data Absensi
+            </a>
+
+            <a href="{{ url_for('logout') }}" class="logout-button">
+                🚪 &nbsp; Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
