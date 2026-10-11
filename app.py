@@ -1,11 +1,24 @@
-
-from flask import Flask, render_template, request, redirect, url_for
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    send_from_directory
+)
 from datetime import datetime
+from pathlib import Path
 
 app = Flask(__name__)
 
+
+# Lokasi folder public
+PUBLIC_DIR = Path(__file__).resolve().parent / "public"
+
+
 # Data absensi sementara
 attendance_data = []
+
 
 # Daftar mata kuliah
 subjects = [
@@ -14,6 +27,24 @@ subjects = [
     "Matematika",
     "Bahasa Indonesia"
 ]
+
+
+# Membaca CSS dari folder public saat dijalankan secara lokal
+@app.route("/css/<path:filename>")
+def public_css(filename):
+    return send_from_directory(
+        str(PUBLIC_DIR / "css"),
+        filename
+    )
+
+
+# Membaca JavaScript dari folder public saat dijalankan secara lokal
+@app.route("/js/<path:filename>")
+def public_js(filename):
+    return send_from_directory(
+        str(PUBLIC_DIR / "js"),
+        filename
+    )
 
 
 # Halaman utama langsung membuka dashboard
@@ -86,9 +117,11 @@ def take_attendance():
 
     subject = request.form.get("subject", "")
 
+    # Memeriksa nama dan mata kuliah
     if not student_name or subject not in subjects:
         return redirect(url_for("attendance"))
 
+    # Membuat data absensi
     attendance = {
         "username": student_name,
         "subject": subject,
@@ -110,5 +143,6 @@ def history():
     )
 
 
+# Menjalankan aplikasi Flask
 if __name__ == "__main__":
     app.run(debug=True)
